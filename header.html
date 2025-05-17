@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+    <div th:fragment="header">
+        <header style="background: #4caf50; color: white; padding: 1em 0; text-align: center;">
+            <img src="/logo/petadota-logo.png" alt="PetAdota Logo" style="height: 48px; vertical-align: middle;"/>
+            <span style="font-size: 2em; font-weight: bold; margin-left: 10px;">PetAdota</span>
+            <nav style="margin-top: 10px;">
+                <a href="/pets" style="color: white; margin: 0 10px; text-decoration: underline;">Home</a>
+                <a href="/pets/novo" style="color: white; margin: 0 10px;">Cadastrar Pet</a>
+                <a href="/h2-console" style="color: white; margin: 0 10px;">Banco H2</a>
+            </nav>
+        </header>
+    </div>
+</body>
+</html>
