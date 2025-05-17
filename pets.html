@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets para Adoção - PetAdota</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="icon" th:href="@{/favicon/favicon.ico}" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <h1>Pets disponíveis para adoção</h1>
+        <div th:if="${mensagemSucesso}" class="alert alert-success" th:text="${mensagemSucesso}"></div>
+        <a href="/pets/novo" class="btn btn-primary">Cadastrar Novo Pet</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Idade</th>
+                    <th>Raça</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pet : ${pets}">
+                    <td><img th:src="${pet.imagemUrl}" alt="Foto do pet" width="80"/></td>
+                    <td th:text="${pet.nome}"></td>
+                    <td th:text="${pet.tipo}"></td>
+                    <td th:text="${pet.idade}"></td>
+                    <td th:text="${pet.raca}"></td>
+                    <td th:text="${pet.statusAdocao}"></td>
+                    <td>
+                        <a th:href="@{'/pets/' + ${pet.id}}" class="btn btn-info">Detalhes</a>
+                        <a th:href="@{'/pets/editar/' + ${pet.id}}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{'/pets/excluir/' + ${pet.id}}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
