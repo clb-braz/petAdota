@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pet.id} != null ? 'Editar Pet' : 'Cadastrar Pet'">Pet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="icon" th:href="@{/favicon/favicon.ico}" />
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container">
+        <h1 th:text="${pet.id} != null ? 'Editar Pet' : 'Cadastrar Novo Pet'"></h1>
+        <form th:action="${pet.id} != null ? @{'/pets/atualizar/' + ${pet.id}} : @{/pets}" th:object="${pet}" method="post">
+            <div>
+                <label>Nome:</label>
+                <input type="text" th:field="*{nome}" />
+                <div class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+            <div>
+                <label>Tipo:</label>
+                <input type="text" th:field="*{tipo}" />
+                <div class="error" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></div>
+            </div>
+            <div>
+                <label>Idade:</label>
+                <input type="number" th:field="*{idade}" min="0" />
+                <div class="error" th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}"></div>
+            </div>
+            <div>
+                <label>Raça:</label>
+                <input type="text" th:field="*{raca}" />
+                <div class="error" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></div>
+            </div>
+            <div>
+                <label>Status de Adoção:</label>
+                <select th:field="*{statusAdocao}">
+                    <option value="">Selecione</option>
+                    <option value="Disponível">Disponível</option>
+                    <option value="Em processo">Em processo</option>
+                    <option value="Adotado">Adotado</option>
+                </select>
+                <div class="error" th:if="${#fields.hasErrors('statusAdocao')}" th:errors="*{statusAdocao}"></div>
+            </div>
+            <div>
+                <label>Descrição:</label>
+                <textarea th:field="*{descricao}"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></div>
+            </div>
+            <div>
+                <label>URL da Imagem:</label>
+                <input type="text" th:field="*{imagemUrl}" />
+                <div class="error" th:if="${#fields.hasErrors('imagemUrl')}" th:errors="*{imagemUrl}"></div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <a href="/pets" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
